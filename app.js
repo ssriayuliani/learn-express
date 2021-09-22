@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 // to show the messages in redirect use flash
 const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
 
 const app = express();
+
+// passport config
+require("./config/passport")(passport);
 
 // db config
 const db = require("./config/key").MongoURI;
@@ -33,6 +37,10 @@ app.use(
   })
 );
 
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // connect flash
 app.use(flash());
 
@@ -40,6 +48,8 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
+  // show the flash for login or passport
+  res.locals.error = req.flash("error");
   next();
 });
 
