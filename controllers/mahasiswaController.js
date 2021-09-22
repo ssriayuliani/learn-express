@@ -1,5 +1,5 @@
 // Membuat variabel Mahasiswa dan mengimport/required dari model Mahasiswa
-const Mahasiswa = require("../models/Mahasiswa");
+const Mahasiswa = require("../models/mahasiswaScheme");
 
 // Dibawah ini kita menggunakan metod export, maka semua metod yang ada di dalam object(module.exports) akan ter export
 module.exports = {
